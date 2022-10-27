@@ -29,10 +29,11 @@
 @implementation UIDevice (LCActionSheet)
 
 - (BOOL)lc_isX {
-    CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    CGFloat height = MAX(screenSize.width, screenSize.height);
-    BOOL isX = height == 812.0 || height == 896.0;
-    return isX;
+    CGFloat bottom = 0.f;
+    if (@available(iOS 11.0, *)) {
+        bottom = [UIApplication sharedApplication].delegate.window.safeAreaInsets.bottom;//34
+    }
+    return bottom > 0.f;
 }
 
 @end
